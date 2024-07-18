@@ -1,7 +1,7 @@
 
 let restart = document.getElementById("restart");
 restart.onclick = function(){
-    
+
 }
 function main(){
     let box1 = document.getElementById("box1");
@@ -40,18 +40,21 @@ function main(){
             boxes[i][j].addEventListener("click", e =>{
                 if(boxes[i][j].textContent == ""){
                     boxes[i][j].textContent = playerSymbol;
+                    if(checkWin(boxes,playerSymbol,computerSymbol)){
+                        winMsg.textContent = "Player has won";
+                        //popup msg
+                    }
+                    else if(checkFullness(boxes,playerSymbol,computerSymbol)){
+                        winMsg.textContent = "Tie";
+                        //popup msg
+                    }
+                    else{
+                        aiMove(boxes,playerSymbol,computerSymbol);
+                    }
                 }
                 
                 
-                if(checkWin(boxes,playerSymbol,computerSymbol)){
-                    winMsg.textContent = "Player has won";
-                }
-                else if(checkFullness(boxes,playerSymbol,computerSymbol)){
-                    winMsg.textContent = "Tie";
-                }
-                else{
-                    aiMove(boxes,playerSymbol,computerSymbol);
-                }
+                 // fix logic here where ai can move even though player can select same spot still 
                 
                 //check win
                 // check if full

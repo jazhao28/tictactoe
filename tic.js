@@ -57,7 +57,7 @@ function main(){
                     }
                     else if(checkFullness(boxes,playerSymbol,computerSymbol)){
                         boardStatus = "Tie"
-                        winMsg.textContent = "Tie";
+                        displayEndContent(boardStatus,popUp,endMsg);
                         //popup msg
 
                     }

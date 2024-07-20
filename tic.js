@@ -1,8 +1,5 @@
 
-let restart = document.getElementById("restart");
-restart.onclick = function(){
 
-}
 function main(){
     let box1 = document.getElementById("box1");
     let box2 = document.getElementById("box2");
@@ -17,36 +14,52 @@ function main(){
     let Obtn = document.getElementById("Obtn");
     let playerSymbol;
     let computerSymbol;
-    let submitBtn = document.getElementById("submit");
+    let endMsg = document.getElementById("endMsg");
+    let popUp = document.getElementById("popUp");
+    
     let winMsg = document.getElementById("winMsg");
+    let restartBtn = document.getElementById("restart");
+    let boardStatus = "";
 
     const boxes = [[box1,box2,box3],[box4,box5,box6],[box7,box8,box9]];
-    submitBtn.onclick = function(){
-        if(Xbtn.checked){
-            playerSymbol = "X";
-            computerSymbol = "O"
-        }
-        else if(Obtn.checked){
-            playerSymbol = "O";
-            computerSymbol = "X";
-        }
-        console.log(playerSymbol);
-        console.log(computerSymbol);
     
+    Xbtn.onclick = function(){
+        playerSymbol = "X";
+        computerSymbol = "O";
+       
+        
     }
+    Obtn.onclick = function(){
+        playerSymbol = "O";
+        computerSymbol = "X";
+        
+    }
+ 
+       
+    
+    
     const copyOfBoxes = [[box1,box2,box3],[box4,box5,box6],[box7,box8,box9]]
     for(let i = 0; i < boxes.length; i++){
         for(let j = 0; j < 3; j++){
+           
+          
             boxes[i][j].addEventListener("click", e =>{
                 if(boxes[i][j].textContent == ""){
+
                     boxes[i][j].textContent = playerSymbol;
                     if(checkWin(boxes,playerSymbol,computerSymbol)){
-                        winMsg.textContent = "Player has won";
-                        //popup msg
+                        boardStatus = "Player"
+                        displayEndContent(boardStatus,popUp,endMsg);
+                        
+                        
+                        
+                        
                     }
                     else if(checkFullness(boxes,playerSymbol,computerSymbol)){
+                        boardStatus = "Tie"
                         winMsg.textContent = "Tie";
                         //popup msg
+
                     }
                     else{
                         aiMove(boxes,playerSymbol,computerSymbol);
@@ -64,7 +77,38 @@ function main(){
             })
         }
     }
+    restartBtn.onclick = function(){
+        for(let i = 0; i< boxes.length; i++){
+            for(let j = 0; j < 3; j++){
+                boxes[i][j].textContent = "";
+                boxes[i][j].style.color = "";
+            }
+        }
+        popUp.style.display = "none";
+        Obtn.checked = false;
+        Xbtn.checked = false;
+        playerSymbol = null;
+        computerSymbol = null;
+    }
+   
 
+}
+
+function displayEndContent(status,popUp, endMsg){
+    popUp.style.display = "block";
+
+    if(status == "Player"){
+
+        
+        endMsg.textContent = "Player has won";
+    }
+    else if(status == "Tie"){
+        endMsg.textContent = "Tie";
+        
+    }
+    else if(status == "Computer"){
+        endMsg.textContent = "Computer has won"
+    }
 }
 
 function checkFullness(boxes){
@@ -196,6 +240,7 @@ function aiMove(boxes,playerSymbol,computerSymbol){
 
     let j = Math.floor(Math.random() * 3);
     let found = false;
+    let boardStatus = "";
     while(!found){
         if(boxes[i][j].textContent == ""){
             boxes[i][j].textContent = computerSymbol;
@@ -210,10 +255,13 @@ function aiMove(boxes,playerSymbol,computerSymbol){
     }
 
     if(checkWin(boxes,playerSymbol,computerSymbol)){
-        winMsg.textContent = "Computer Won";
+        boardStatus = "Computer"
+
+        displayEndContent(boardStatus,popUp,endMsg)
     }
     else if(checkFullness(boxes,playerSymbol,computerSymbol)){
-        winMsg.textContent = "Tie game";
+        boardStatus = "Tie"
+        displayEndContent(boardStatus, popUp,endMsg);
     }
 
    

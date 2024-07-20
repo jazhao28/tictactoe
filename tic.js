@@ -19,6 +19,10 @@ function main(){
     
     let winMsg = document.getElementById("winMsg");
     let restartBtn = document.getElementById("restart");
+    let winCount = document.getElementById("winsCount");
+    let lossCount = document.getElementById("lossCount");
+    let tieCount = document.getElementById("tiesCount");
+    let contBtn = document.getElementById("continue");
     let boardStatus = "";
 
     const boxes = [[box1,box2,box3],[box4,box5,box6],[box7,box8,box9]];
@@ -39,17 +43,20 @@ function main(){
     
     
     const copyOfBoxes = [[box1,box2,box3],[box4,box5,box6],[box7,box8,box9]]
+    let gameOver = false;
     for(let i = 0; i < boxes.length; i++){
         for(let j = 0; j < 3; j++){
            
           
             boxes[i][j].addEventListener("click", e =>{
-                if(boxes[i][j].textContent == ""){
+                if(boxes[i][j].textContent == "" && !gameOver){
 
                     boxes[i][j].textContent = playerSymbol;
                     if(checkWin(boxes,playerSymbol,computerSymbol)){
                         boardStatus = "Player"
+                        winCount.textContent = Number(winCount.textContent) + 1;
                         displayEndContent(boardStatus,popUp,endMsg);
+                        gameOver = true;
                         
                         
                         
@@ -57,8 +64,10 @@ function main(){
                     }
                     else if(checkFullness(boxes,playerSymbol,computerSymbol)){
                         boardStatus = "Tie"
+                        tieCount.textContent = Number(tieCount.textContent) + 1;
                         displayEndContent(boardStatus,popUp,endMsg);
                         //popup msg
+                        gameOver = true;
 
                     }
                     else{
@@ -77,6 +86,21 @@ function main(){
             })
         }
     }
+    contBtn.onclick = function(){
+        for(let i = 0; i< boxes.length; i++){
+            for(let j = 0; j < 3; j++){
+                boxes[i][j].textContent = "";
+                boxes[i][j].style.color = "";
+            }
+        }
+        popUp.style.display = "none";
+        Obtn.checked = false;
+        Xbtn.checked = false;
+        playerSymbol = null;
+        computerSymbol = null;
+        gameOver = false;
+
+    }
     restartBtn.onclick = function(){
         for(let i = 0; i< boxes.length; i++){
             for(let j = 0; j < 3; j++){
@@ -89,13 +113,19 @@ function main(){
         Xbtn.checked = false;
         playerSymbol = null;
         computerSymbol = null;
+        winCount.textContent = 0;
+        tieCount.textContent = 0;
+        lossCount.textContent = 0;
+        gameOver = false;
     }
    
 
 }
 
+
 function displayEndContent(status,popUp, endMsg){
     popUp.style.display = "block";
+    
 
     if(status == "Player"){
 
@@ -256,11 +286,15 @@ function aiMove(boxes,playerSymbol,computerSymbol){
 
     if(checkWin(boxes,playerSymbol,computerSymbol)){
         boardStatus = "Computer"
+        
+        lossCount.textContent = Number(lossCount.textContent) + 1;
 
         displayEndContent(boardStatus,popUp,endMsg)
     }
     else if(checkFullness(boxes,playerSymbol,computerSymbol)){
         boardStatus = "Tie"
+        
+        tieCount.textContent = Number(tieCount.textContent) + 1;
         displayEndContent(boardStatus, popUp,endMsg);
     }
 

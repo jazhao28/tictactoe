@@ -1,18 +1,24 @@
+.centerGrid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
 .gridContainer{
     display: grid;
     
     grid-template-columns: auto auto auto;
     height: 300px;
     
-    width: 100px;
+    width: 300px;
     padding: 10px;
-    margin-left: 425px;
-    margin-right: 4250px;
     
     
     
 
 }
+
 
 .box{
     background-color: white;
@@ -38,19 +44,20 @@ h1{
 }
 #popUp{
     text-align: center;
-    position: absolute;
+    
 
-    top: 12em;
+    
     display: none;
     
     
-    width: 50%;
-   
-    left: 50%;
-    transform: translateX(-50%);
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    
     align-content: center;
     border: 3px solid black;
-    z-index: 999;
+    
+    background-color: #705CF2;
     
     
     
@@ -75,6 +82,45 @@ h1{
 body{
     backdrop-filter: blur(300px);
     background-color: white;
+    font-family: "Verdana",sans-serif;
     
 
+}
+
+#restart{
+    border-radius: 10px;
+    font-size: 20px;
+
+}
+
+#restart:hover{
+    cursor: pointer;
+}
+
+.scoreItems{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+
+}
+
+
+.scoreLabel{
+    border-right: 1px solid black;
+    padding-right: 5px;
+    font-weight: bold;
+}
+#tiesLabel{
+    border-right: none;
+}
+.count{
+    text-align: center;
+    font-weight: bold;
+}
+#continue{
+    border-radius: 10px;
+    font-size: 20px;
+    margin-right: 15px;
 }

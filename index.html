@@ -20,7 +20,24 @@
             
         </div>
     </div>
-    
+    <div class="scoreBoard">
+        <div class="scoreItems">
+            <div>
+            <label id="winsLabel" class="scoreLabel">Wins</label>
+            <p id="winsCount" class="count">0</p>
+            </div>
+            <div>
+            <label id="lossLabel" class="scoreLabel">Losses</label>
+            <p id="lossCount" class="count">0</p>
+            </div>
+            <div>
+            <label id="tiesLabel" class = scoreLabel>Tie</label>
+            <p id="tiesCount" class="count">0</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="centerGrid">
     <div class="gridContainer">
         <div class="box" id="box1"></div>
         <div class="box" id="box2"></div>
@@ -33,10 +50,14 @@
         <div class="box" id="box9"></div>
 
     </div>
+    </div>
     <div id="popUp">
         <div id="popContent">
             <p id="endMsg"></p>
+            <div class="twoButtons">
+            <button id="continue">Continue</button>
             <button id="restart">Restart</button>
+            </div>
         </div>
     </div>
     <p id="winMsg"></p>

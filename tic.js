@@ -71,7 +71,7 @@ function main(){
 
                     }
                     else{
-                        aiMove(boxes,playerSymbol,computerSymbol);
+                        gameOver = aiMove(boxes,playerSymbol,computerSymbol);
                     }
                 }
                 
@@ -271,6 +271,7 @@ function aiMove(boxes,playerSymbol,computerSymbol){
     let j = Math.floor(Math.random() * 3);
     let found = false;
     let boardStatus = "";
+    let gameStatus = false;
     while(!found){
         if(boxes[i][j].textContent == ""){
             boxes[i][j].textContent = computerSymbol;
@@ -290,13 +291,17 @@ function aiMove(boxes,playerSymbol,computerSymbol){
         lossCount.textContent = Number(lossCount.textContent) + 1;
 
         displayEndContent(boardStatus,popUp,endMsg)
+        gameStatus = true;
     }
     else if(checkFullness(boxes,playerSymbol,computerSymbol)){
         boardStatus = "Tie"
         
         tieCount.textContent = Number(tieCount.textContent) + 1;
         displayEndContent(boardStatus, popUp,endMsg);
+        gameStatus = true;
     }
+
+    return gameStatus;
 
    
     
